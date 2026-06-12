@@ -54,6 +54,7 @@ jobs:
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
+          git pull --rebase origin main
           git commit -m "🤖 Update AI news $(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M')"
           git push
         fi
