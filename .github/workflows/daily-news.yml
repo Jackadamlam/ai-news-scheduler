@@ -47,10 +47,11 @@ jobs:
         MIMO_API_KEY: ${{ secrets.MIMO_API_KEY }}
       
     - name: Commit and push changes
+      working-directory: ${{ github.workspace }}
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "GitHub Actions Bot"
-        git add output/
+        git add "Daily News/output/"
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
