@@ -32,8 +32,11 @@ class MarkdownGenerator:
         source = news.get('source', 'Unknown')
         stars = self._stars_display(news.get('stars', 3))
         pm_insight = news.get('pm_insight', news.get('summary', '')[:200])
+        # 截断过长的PM Insight
+        if len(pm_insight) > 300:
+            pm_insight = pm_insight[:297] + "..."
 
-        return f"""- ** `{url}` ** ({source} | {stars})
+        return f"""- **[{title}]({url})** ({source} | {stars})
   - **PM Insight**: {pm_insight}
 
 """

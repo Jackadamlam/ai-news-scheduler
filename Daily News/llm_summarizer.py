@@ -35,14 +35,25 @@ class LLMSummarizer:
         except Exception as e:
             logger.error(f"LLM客户端初始化失败: {e}")
 
-    def summarize_batch(self, news_list: List[Dict]) -> List[Dict]:
-        """批量生成摘要和评级"""
+    def summarize_batch(self, news_list: List[Dict], batch_size: int = 3) -> List[Dict]:
+        """批量生成摘要和评级，分批处理避免API超时"""
         if not self.client:
             return self._fallback_summarize(news_list)
 
         if not news_list:
             return []
 
+        # 分批处理
+        results = []
+        for batch_start in range(0, len(news_list), batch_size):
+            batch = news_list[batch_start:batch_start + batch_size]
+            batch_results = self._summarize_single_batch(batch, batch_start)
+            results.extend(batch_results)
+
+        return results
+
+    def _summarize_single_batch(self, news_list: List[Dict], offset: int = 0) -> List[Dict]:
+        """处理单批新闻"""
         # 构建批量prompt
         articles_text = ""
         for i, news in enumerate(news_list, 1):
@@ -112,14 +123,14 @@ Articles to analyze:
                     news.setdefault("pm_insight", "")
                     news.setdefault("stars", 3)
 
-            logger.info(f"LLM摘要生成成功，共{len(news_list)}条")
+            logger.info(f"LLM摘要生成成功，批次offset={offset}，共{len(news_list)}条")
             return news_list
 
         except json.JSONDecodeError as e:
-            logger.error(f"LLM返回JSON解析失败: {e}\nRaw: {content[:500]}")
+            logger.error(f"LLM返回JSON解析失败 (batch offset={offset}): {e}\nRaw: {content[:500]}")
             return self._fallback_summarize(news_list)
         except Exception as e:
-            logger.error(f"LLM摘要生成失败: {e}")
+            logger.error(f"LLM摘要生成失败 (batch offset={offset}): {e}")
             return self._fallback_summarize(news_list)
 
     def generate_trend_comment(self, news_list: List[Dict]) -> str:
