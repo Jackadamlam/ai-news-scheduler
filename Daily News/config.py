@@ -13,11 +13,11 @@ SCHEDULE_CONFIG = {
     "timezone": "Asia/Shanghai"
 }
 
-# LLM配置
+# LLM配置 (小米MiMo Token Plan API)
 LLM_CONFIG = {
-    "api_key": os.environ.get("OPENAI_API_KEY", ""),
-    "model": "gpt-4o-mini",
-    "base_url": "https://api.openai.com/v1",
+    "api_key": os.environ.get("MIMO_API_KEY", ""),
+    "model": "mimo-v2.5",
+    "base_url": "https://token-plan-cn.xiaomimimo.com/v1",
     "max_tokens": 2000,
     "temperature": 0.3,
 }
