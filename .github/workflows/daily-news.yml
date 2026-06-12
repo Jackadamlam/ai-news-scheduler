@@ -23,6 +23,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
       
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -55,7 +57,12 @@ jobs:
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
-          git pull --rebase origin main
+          git pull --rebase origin main || true
           git commit -m "🤖 Update AI news $(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M')"
-          git push
+          for i in 1 2 3; do
+            git push && break
+            echo "Push failed, retrying ($i/3)..."
+            git pull --rebase origin main
+            sleep 2
+          done
         fi
