@@ -23,8 +23,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
       
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -49,20 +47,8 @@ jobs:
         MIMO_API_KEY: ${{ secrets.MIMO_API_KEY }}
       
     - name: Commit and push changes
-      working-directory: ${{ github.workspace }}
-      run: |
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "GitHub Actions Bot"
-        git add "Daily News/output/"
-        if git diff --staged --quiet; then
-          echo "No changes to commit"
-        else
-          git pull --rebase origin main || true
-          git commit -m "🤖 Update AI news $(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M')"
-          for i in 1 2 3; do
-            git push && break
-            echo "Push failed, retrying ($i/3)..."
-            git pull --rebase origin main
-            sleep 2
-          done
-        fi
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "🤖 Update AI news"
+        file_pattern: "Daily News/output/*.md"
+        branch: main
