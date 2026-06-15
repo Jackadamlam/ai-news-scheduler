@@ -9,6 +9,7 @@ import logging
 
 from config import get_current_datetime
 from news_fetcher import NewsFetcher
+from social_media_monitor import SocialMediaMonitor
 from llm_summarizer import LLMSummarizer
 from markdown_generator import MarkdownGenerator
 from scheduler import NewsScheduler
@@ -36,13 +37,21 @@ def run_once():
     logger.info("=" * 60)
 
     try:
-        # 1. 获取新闻
+        # 1. 获取新闻（RSS + Web）
         fetcher = NewsFetcher()
         news_list = fetcher.fetch_all_news()
+
+        # 2. 获取社媒热点
+        social_monitor = SocialMediaMonitor()
+        social_news = social_monitor.fetch_all_social_news()
+        if social_news:
+            logger.info(f"社媒监控获取到 {len(social_news)} 条")
+            news_list.extend(social_news)
+
         if not news_list:
             logger.warning("未获取到任何新闻")
             return None
-        logger.info(f"获取到 {len(news_list)} 条新闻")
+        logger.info(f"总共获取到 {len(news_list)} 条新闻")
 
         # 2. LLM摘要和评级
         summarizer = LLMSummarizer()
