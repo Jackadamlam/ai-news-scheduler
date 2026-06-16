@@ -83,6 +83,24 @@ KEYWORDS = {
     ]
 }
 
+# 社媒KOL监控配置
+SOCIAL_MEDIA_ACCOUNTS = {
+    "twitter": [
+        {"handle": "@OpenAI", "name": "OpenAI", "category": "AI_Model"},
+        {"handle": "@AnthropicAI", "name": "Anthropic", "category": "AI_Model"},
+        {"handle": "@GoogleDeepMind", "name": "Google DeepMind", "category": "AI_Model"},
+        {"handle": "@MistralAI", "name": "Mistral AI", "category": "AI_Model"},
+        {"handle": "@DrJimFan", "name": "Dr. Jim Fan (NVIDIA)", "category": "AI_Research"},
+        {"handle": "@AndrewYNg", "name": "Andrew Ng", "category": "AI_Research"},
+        {"handle": "@karpathy", "name": "Karpathy", "category": "AI_Research"},
+        {"handle": "@ylecun", "name": "Yann LeCun (Meta)", "category": "AI_Research"},
+        {"handle": "@nvidia", "name": "NVIDIA", "category": "Hardware"},
+        {"handle": "@Qualcomm", "name": "Qualcomm", "category": "Hardware"},
+        {"handle": "@verge", "name": "The Verge", "category": "TechMedia"},
+        {"handle": "@TechCrunch", "name": "TechCrunch", "category": "TechMedia"},
+    ],
+}
+
 # Obsidian配置
 OBSIDIAN_CONFIG = {
     "vault_path": os.path.expanduser("~/Documents/Obsidian/Daily AI News"),
