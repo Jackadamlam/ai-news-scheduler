@@ -16,7 +16,7 @@ SCHEDULE_CONFIG = {
 # LLM配置 (小米MiMo Token Plan API)
 LLM_CONFIG = {
     "api_key": os.environ.get("MIMO_API_KEY", ""),
-    "model": "mimo-v2.5-pro",
+    "model": "mimo-v2.5",
     "base_url": "https://token-plan-cn.xiaomimimo.com/v1",
     "max_tokens": 2000,
     "temperature": 0.3,
@@ -80,49 +80,6 @@ KEYWORDS = {
         "computer vision", "NLP", "autonomous driving", "AI agent",
         "on-device AI", "edge inference", "AI infrastructure",
         "multimodal", "reasoning", "agentic", "RAG", "fine-tuning",
-    ]
-}
-
-# 社媒KOL监控配置
-SOCIAL_MEDIA_ACCOUNTS = {
-    "twitter": [
-        # AI模型公司官方
-        {"handle": "@OpenAI", "name": "OpenAI", "category": "AI_Model"},
-        {"handle": "@AnthropicAI", "name": "Anthropic", "category": "AI_Model"},
-        {"handle": "@GoogleDeepMind", "name": "Google DeepMind", "category": "AI_Model"},
-        {"handle": "@MistralAI", "name": "Mistral AI", "category": "AI_Model"},
-        {"handle": "@huaborz", "name": "Jim Fan (NVIDIA)", "category": "AI_Research"},
-        {"handle": "@DrJimFan", "name": "Dr. Jim Fan", "category": "AI_Research"},
-        {"handle": "@AndrewYNg", "name": "Andrew Ng", "category": "AI_Research"},
-        {"handle": "@kaborz", "name": "Karpathy", "category": "AI_Research"},
-        {"handle": "@ylecun", "name": "Yann LeCun (Meta)", "category": "AI_Research"},
-        {"handle": "@GaryMarcus", "name": "Gary Marcus", "category": "AI_Research"},
-        {"handle": "@hardmaru", "name": "David Ha (Sakana AI)", "category": "AI_Research"},
-        {"handle": "@JeffDean", "name": "Jeff Dean (Google)", "category": "AI_Research"},
-        # 硬件半导体
-        {"handle": "@nvidia", "name": "NVIDIA", "category": "Hardware"},
-        {"handle": "@Qualcomm", "name": "Qualcomm", "category": "Hardware"},
-        {"handle": "@IntelAI", "name": "Intel AI", "category": "Hardware"},
-        {"handle": "@AMDAI", "name": "AMD AI", "category": "Hardware"},
-        {"handle": "@xaborz", "name": "Xiaomi AI", "category": "Hardware"},
-        # 科技媒体
-        {"handle": "@verge", "name": "The Verge", "category": "TechMedia"},
-        {"handle": "@TechCrunch", "name": "TechCrunch", "category": "TechMedia"},
-        {"handle": "@arstechnica", "name": "Ars Technica", "category": "TechMedia"},
-        {"handle": "@WIRED", "name": "Wired", "category": "TechMedia"},
-        {"handle": "@haborz", "name": "Hugging Face", "category": "AI_Community"},
-        # 中文KOL
-        {"handle": "@karminski3", "name": "karminski (AI科普)", "category": "CN_KOL"},
-        {"handle": "@dotey", "name": "宝玉 (AI洞察)", "category": "CN_KOL"},
-        {"handle": "@宝玉", "name": "宝玉", "category": "CN_KOL"},
-        {"handle": "@歸藏", "name": "歸藏 (AI产品)", "category": "CN_KOL"},
-    ],
-    "wechat_accounts": [
-        {"name": "量子位", "category": "AI_Media"},
-        {"name": "机器之心", "category": "AI_Media"},
-        {"name": "36氪", "category": "Tech_Media"},
-        {"name": "芯智讯", "category": "Hardware"},
-        {"name": "雷峰网", "category": "AI_Media"},
     ]
 }
 

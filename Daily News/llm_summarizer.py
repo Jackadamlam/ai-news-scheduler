@@ -166,7 +166,11 @@ Headlines:
     def _fallback_summarize(self, news_list: List[Dict]) -> List[Dict]:
         """无LLM时的简单摘要"""
         for news in news_list:
-            news.setdefault("pm_insight", news.get("summary", "")[:200])
+            # 截断过长的摘要
+            pm_insight = news.get("summary", "")[:200]
+            if len(pm_insight) > 300:
+                pm_insight = pm_insight[:297] + "..."
+            news.setdefault("pm_insight", pm_insight)
             news.setdefault("stars", 3)
             news.setdefault("category", news.get("category", "Other"))
         return news_list

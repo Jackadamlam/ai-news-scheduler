@@ -51,3 +51,4 @@ jobs:
       with:
         commit_message: "🤖 Update AI news"
         branch: main
+        pull_options: "--rebase"
